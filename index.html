@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Even or Odd</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap');
+        * {
+            font-family: "Poppins", sans-serif;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            color: white;
+            background-color: rgb(44, 44, 44);
+        }
+
+        .title-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+            padding: 5vmin;
+            background-color: rgb(41, 41, 41);
+        }
+
+        .in-out-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .title-container > h1 { background-color: inherit; font-size: 2.5rem; }
+        .title-container > h2 { background-color: inherit; }
+
+        .num-input {
+            width: 80vmin;
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        .num-submit {
+            position: absolute;
+            top: 55vh;
+            background-color: rgb(71, 71, 71);
+            border: 0;
+            padding: .5rem 1rem;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            cursor: pointer;
+            transition: all .25s ease 0s;
+        }
+    
+        .output {
+            position: absolute;
+            top: 70vh;
+            z-index: 100;
+            font-size: 3rem;
+            width: 80vmin;
+            text-align: center;
+        }
+
+        .gitLink {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+            background-color: inherit;
+        }
+
+        .hint {
+            position: absolute;
+            left: 30px;
+            font-size: .1rem;
+            top: 60vh;
+            z-index: 1000000;
+            color: white;
+            background-color: transparent;
+            transform: rotate(14deg);
+        }
+
+        @media (max-width: 920px) {
+            .hint {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="title-container">
+        <a href="https://github.com/iHas3Arms?tab=repositories" class="gitLink"></a>
+        <h1>Even or Odd</h1>
+        <h2>Which is it?</h2>
+    </div>
+    <div class="in-out-container">
+        <div class="hint">
+            <p>If you checked what this says, good for you.<br>If you find what this message guides you to, you are a warrior.</p>
+        </div>
+        <input class="num-input" id="input" type="number" placeholder="e.g. 5">
+        <button class="num-submit" onclick="submit()">Find Out the Truth...</button>
+        <div class="output" id="output">???</div>
+    </div>
+</body>
+<script>
+    let input = document.getElementById("input");
+    let output = document.querySelector(".output");
+
+    function submit() {
+        let num = input.value.toString();
+
+        input.value = "";
+
+        let check = checkIfCompatible(num);
+
+        if (!check) return;
+
+        if (num % 2 == 0) output.innerText = "Even";
+        if (num % 2 != 0) output.innerText = "Odd";
+    }
+
+    function checkIfCompatible(n) {
+        if (n == "") {
+            return false;
+        } else if (n == "0") {
+            output.innerText = "Please enter a different number";
+            return false;
+        }
+        if (n.split(".")[1]) {
+            output.innerText = "You cannot use decimals";
+            return false;
+        }
+        return true;
+    }
+</script>
+</html>
