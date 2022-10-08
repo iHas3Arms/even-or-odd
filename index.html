@@ -119,6 +119,12 @@
     let input = document.getElementById("input");
     let output = document.querySelector(".output");
 
+    document.addEventListener("keydown", e => {
+        if (e.key == "Enter") {
+            submit();
+        }
+    });
+    
     function submit() {
         let num = input.value.toString();
 
